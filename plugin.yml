@@ -1,0 +1,11 @@
+name: FountainOfYouth
+main: com.dsnyder.fountainofyouth.FountainOfYouth
+version: 0.0.1-ALPHA
+author: Dan Snyder
+description: A plugin that allows you to keep an entity a baby forever
+commands:
+  fountainofyouth:
+    description: Main fountain of youth commmand
+    aliases: [foyouth]
+  youth:
+    description: Dips the food item in your hand in the fountain, enchanting it
