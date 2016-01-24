@@ -14,8 +14,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.Potion;
 
 public class FountainOfYouth extends JavaPlugin {
+	
 	public static final String VERSION_KEY		= "FOYVersion";
-	public static final String CURRENT_VERSION	= "0.1.0-ALPHA";
+	public static final String CURRENT_VERSION	= "0.1.1-ALPHA";
+	
+	public static final String YOUTH_LORE = "Youth I";
+	public static final String AGING_LORE = "Aging I";
 	
 	static JavaPlugin main;
 	
@@ -30,6 +34,30 @@ public class FountainOfYouth extends JavaPlugin {
 		
 	}
 	
+	/**
+	 * 
+	 * @param items - item to enchant. Must be a splash potion
+	 * @param l - lore to add 
+	 * @return true if lore was added, false if item was not a splash potion
+	 */
+	private boolean addSplashLore(ItemStack items, String l) {
+		// ensure it is a potion
+		if (!items.getType().equals(Material.POTION)) return false;
+		// ensure it is a splash potion
+		if (!Potion.fromItemStack(items).isSplash()) return false;
+		
+		ItemMeta im = items.getItemMeta();
+	    List<String> lore = new ArrayList<>();
+	    if (im.hasLore()) {
+	    	lore = im.getLore();
+	    }
+	    
+	    lore.add(l);
+	    im.setLore(lore);
+	    items.setItemMeta(im);
+	    return true;
+	}
+	
 	@Override
     public boolean onCommand(CommandSender sender, 
     		Command command, String label, String[] args) {
@@ -41,24 +69,8 @@ public class FountainOfYouth extends JavaPlugin {
 			
 			Player player = (Player) sender;
 			
-			if (player.getItemInHand().getType().equals(Material.POTION)) {
-				
-				ItemStack items = player.getItemInHand();
-				
-				if (!Potion.fromItemStack(items).isSplash()) {
-					sender.sendMessage(ChatColor.RED + "Item must be a splash potion!");
-				}
-				
-				ItemMeta im = items.getItemMeta();
-			    List<String> lore = new ArrayList<>();
-			    if (im.hasLore()) {
-			    	lore = im.getLore();
-			    }
-			    
-			    lore.add("Youth I");
-			    im.setLore(lore);
-			    player.sendMessage("Successfully enchanted");
-			    items.setItemMeta(im);
+			if (addSplashLore(player.getItemInHand(), YOUTH_LORE)) {
+				player.sendMessage(ChatColor.GREEN + "Successfully enchanted");
 			} else {
 				player.sendMessage(ChatColor.RED + "Item must be a splash potion!");
 			}
@@ -72,24 +84,8 @@ public class FountainOfYouth extends JavaPlugin {
 			
 			Player player = (Player) sender;
 			
-			if (player.getItemInHand().getType().equals(Material.POTION)) {
-				
-				ItemStack items = player.getItemInHand();
-				
-				if (!Potion.fromItemStack(items).isSplash()) {
-					sender.sendMessage(ChatColor.RED + "Item must be a splash potion!");
-				}
-				
-				ItemMeta im = items.getItemMeta();
-			    List<String> lore = new ArrayList<>();
-			    if (im.hasLore()) {
-			    	lore = im.getLore();
-			    }
-			    
-			    lore.add("Aging I");
-			    im.setLore(lore);
-			    player.sendMessage("Successfully enchanted");
-			    items.setItemMeta(im);
+			if (addSplashLore(player.getItemInHand(), AGING_LORE)) {
+				player.sendMessage(ChatColor.GREEN + "Successfully enchanted");
 			} else {
 				player.sendMessage(ChatColor.RED + "Item must be a splash potion!");
 			}
@@ -98,8 +94,10 @@ public class FountainOfYouth extends JavaPlugin {
 			
 		} else if (command.getName().equalsIgnoreCase("fountainofyouth")) {
 			if (args.length > 0 && args[0].equalsIgnoreCase("version")) {
-				sender.sendMessage("Fountain of Youth Version " + CURRENT_VERSION);
+				sender.sendMessage(ChatColor.YELLOW + "Fountain of Youth Version " + CURRENT_VERSION);
 				return true;
+			} else {
+				sender.sendMessage(ChatColor.BLUE + "/foyouth " + ChatColor.YELLOW + "[version] - main command. See /help fountainofyouth for more commands");
 			}
 		}
 		return false;

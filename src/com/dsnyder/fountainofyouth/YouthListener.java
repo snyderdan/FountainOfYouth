@@ -20,7 +20,7 @@ public class YouthListener implements Listener {
 		ItemStack item = event.getPotion().getItem();
 		
 		if (!item.getItemMeta().hasLore()) return;
-		if (item.getItemMeta().getLore().contains("Youth I")) {
+		if (item.getItemMeta().getLore().contains(FountainOfYouth.YOUTH_LORE)) {
 			for (Entity e : event.getAffectedEntities()) {
 				if (!(e instanceof Ageable)) continue;
 				
@@ -29,7 +29,7 @@ public class YouthListener implements Listener {
 				ent.setBaby();
 				ent.setAgeLock(true);
 			}
-		} else if (item.getItemMeta().getLore().contains("Aging I")) {
+		} else if (item.getItemMeta().getLore().contains(FountainOfYouth.AGING_LORE)) {
 			for (Entity e : event.getAffectedEntities()) {
 				if (!(e instanceof Ageable)) continue;
 				

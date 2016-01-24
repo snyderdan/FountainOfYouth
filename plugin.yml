@@ -1,10 +1,11 @@
 name: FountainOfYouth
 main: com.dsnyder.fountainofyouth.FountainOfYouth
-version: 0.1.0-ALPHA
+version: 0.1.1-ALPHA
 author: Dan Snyder
 description: A plugin that allows you to keep an entity a baby forever
 commands:
   fountainofyouth:
+    usage: /foyouth [version]
     description: Main fountain of youth commmand
     aliases: [foyouth]
   youth:
