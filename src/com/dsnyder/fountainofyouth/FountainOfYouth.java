@@ -16,7 +16,7 @@ import org.bukkit.potion.Potion;
 public class FountainOfYouth extends JavaPlugin {
 	
 	public static final String VERSION_KEY		= "FOYVersion";
-	public static final String CURRENT_VERSION	= "0.1.1-ALPHA";
+	public static final String CURRENT_VERSION	= "0.1.2-ALPHA";
 	
 	public static final String YOUTH_LORE = "Youth I";
 	public static final String AGING_LORE = "Aging I";
@@ -58,6 +58,25 @@ public class FountainOfYouth extends JavaPlugin {
 	    return true;
 	}
 	
+	private void removeFOYLore(ItemStack items) {
+		
+		// ensure it is a potion
+		if (!items.getType().equals(Material.POTION)) return;
+		// ensure it is a splash potion
+		if (!Potion.fromItemStack(items).isSplash()) return;
+		
+		ItemMeta im = items.getItemMeta();
+	    List<String> lore = new ArrayList<>();
+	    if (im.hasLore()) {
+	    	lore = im.getLore();
+	    }
+	    
+	    lore.remove(YOUTH_LORE);
+	    lore.remove(AGING_LORE);
+	    im.setLore(lore);
+	    items.setItemMeta(im);
+	}
+	
 	@Override
     public boolean onCommand(CommandSender sender, 
     		Command command, String label, String[] args) {
@@ -68,6 +87,8 @@ public class FountainOfYouth extends JavaPlugin {
 			if (!(sender instanceof Player)) return false;
 			
 			Player player = (Player) sender;
+			
+			removeFOYLore(player.getItemInHand());
 			
 			if (addSplashLore(player.getItemInHand(), YOUTH_LORE)) {
 				player.sendMessage(ChatColor.GREEN + "Successfully enchanted");
@@ -84,6 +105,8 @@ public class FountainOfYouth extends JavaPlugin {
 			
 			Player player = (Player) sender;
 			
+			removeFOYLore(player.getItemInHand());
+			
 			if (addSplashLore(player.getItemInHand(), AGING_LORE)) {
 				player.sendMessage(ChatColor.GREEN + "Successfully enchanted");
 			} else {
@@ -97,7 +120,8 @@ public class FountainOfYouth extends JavaPlugin {
 				sender.sendMessage(ChatColor.YELLOW + "Fountain of Youth Version " + CURRENT_VERSION);
 				return true;
 			} else {
-				sender.sendMessage(ChatColor.BLUE + "/foyouth " + ChatColor.YELLOW + "[version] - main command. See /help fountainofyouth for more commands");
+				sender.sendMessage(ChatColor.GOLD + "/foyouth [version]:" + ChatColor.WHITE + " Main command. See /help fountainofyouth for more commands");
+				return true;
 			}
 		}
 		return false;

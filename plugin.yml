@@ -1,6 +1,6 @@
 name: FountainOfYouth
 main: com.dsnyder.fountainofyouth.FountainOfYouth
-version: 0.1.1-ALPHA
+version: 0.1.2-ALPHA
 author: Dan Snyder
 description: A plugin that allows you to keep an entity a baby forever
 commands:
@@ -10,5 +10,7 @@ commands:
     aliases: [foyouth]
   youth:
     description: Enchants a splash potion in your hand with Youth I
+    usage: /youth
   aging:
     description: Enchants a splash potion in your hand with Aging I
+    usage: /youth
