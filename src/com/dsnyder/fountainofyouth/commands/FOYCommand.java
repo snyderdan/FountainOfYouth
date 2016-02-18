@@ -6,7 +6,6 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.Potion;
@@ -91,7 +90,7 @@ public abstract class FOYCommand {
 	}
 	
 	public boolean execute(CommandSender sender, String[] args) {
-		if (permission == null || PermissionManager.getManager().hasPermission((Player) sender, getPermission())) {
+		if (permission == null || PermissionManager.getManager().hasPermission(sender, getPermission())) {
 			return _execute(sender, args);
 		} else {
 			sender.sendMessage(ChatColor.RED + "You do not have permission for this command.");

@@ -7,7 +7,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import com.dsnyder.fountainofyouth.FountainOfYouth;
 
@@ -27,6 +26,7 @@ public class CommandManager implements CommandExecutor {
 		registerCommand(new YouthCommand());
 		registerCommand(new AgingCommand());
 		registerCommand(new CreateCommand());
+		registerCommand(new ListCommand());
 	}
 	
 	static CommandManager getManager() {
@@ -54,10 +54,8 @@ public class CommandManager implements CommandExecutor {
 			
 			args[0] = args[0].toLowerCase();
 			
-			if (!(sender instanceof Player)) return false;
-			
 			if (!commands.containsKey(args[0])) {
-				sender.sendMessage(ChatColor.RED + args[0] + " is not a valid " + PLUGIN_NAME + " command");
+				sender.sendMessage(ChatColor.RED + "\"" + args[0] + "\"" + " is not a valid " + PLUGIN_NAME + " command");
 				return true;
 			}
 			
