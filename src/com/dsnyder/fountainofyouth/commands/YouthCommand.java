@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import com.dsnyder.fountainofyouth.FountainOfYouth;
 
-public class YouthCommand extends FOYCommand {
+public class YouthCommand extends GenericCommand {
 
 	public YouthCommand() {
 		super("youth", "Enchants splash potion in your hand with Youth I", "youth", "foyouth.enchant.youth");

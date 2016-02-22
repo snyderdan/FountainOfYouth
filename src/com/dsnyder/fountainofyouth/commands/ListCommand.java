@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import com.dsnyder.fountainofyouth.fountains.Fountain;
 import com.dsnyder.fountainofyouth.fountains.FountainManager;
 
-public class ListCommand extends FOYCommand {
+public class ListCommand extends GenericCommand {
 
 	public ListCommand() {
 		super("list", "lists info on all fountains", "list", "foyouth.commands.list");

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import com.dsnyder.fountainofyouth.fountains.FountainManager;
 
-public class CreateCommand extends FOYCommand {
+public class CreateCommand extends GenericCommand {
 
 	public CreateCommand() {
 		super("create", "Creates a fountain of youth", "create <x> <y> <z>", "foyouth.fountains.create");

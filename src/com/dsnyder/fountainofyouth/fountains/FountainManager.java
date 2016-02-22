@@ -43,30 +43,6 @@ public class FountainManager implements Listener {
 		db.save(fountain);
 		
 		fountain.generate();
-		/*
-		// if chunk is not loaded currently, simply return and have the fountain be generated later
-		if (!sender.getWorld().isChunkLoaded(loc.getChunk())) return;
-		
-		int x = loc.getBlockX();
-		int y = loc.getBlockY();
-		int z = loc.getBlockZ();
-		
-		sender.getServer().dispatchCommand(sender, String.format("fill %d %d %d %d %d %d quartz_block 0", 
-	    		x+4, y, z+4, x-4, y, z-4));
-	    sender.getServer().dispatchCommand(sender, String.format("fill %d %d %d %d %d %d air 0", 
-	    		x+3, y+4, z+3, x-3, y-1, z-3));
-	    sender.getServer().dispatchCommand(sender, String.format("fill %d %d %d %d %d %d grass 0", 
-	    		x+4, y-1, z+4, x-4, y-1, z-4));
-	    sender.getServer().dispatchCommand(sender, String.format("fill %d %d %d %d %d %d quartz_block 0", 
-	    		x, y-1, z, x, y+3, z));
-	    sender.getServer().dispatchCommand(sender, String.format("fill %d %d %d %d %d %d quartz_block 0", 
-	    		x+1, y+2, z+1, x-1, y+2, z-1));
-	    sender.getServer().dispatchCommand(sender, String.format("setblock %d %d %d water 0", 
-	    		x, y+4, z));
-	    sender.getServer().dispatchCommand(sender, String.format("setblock %d %d %d dirt 0", 
-	    		x, y+5, z));
-	    sender.getServer().dispatchCommand(sender, String.format("setblock %d %d %d air 0", 
-	    		x, y+5, z));*/
 	}
 	
 	public Fountain[] getFountains() {

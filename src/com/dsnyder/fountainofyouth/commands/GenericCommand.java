@@ -13,14 +13,14 @@ import org.bukkit.potion.Potion;
 import com.dsnyder.fountainofyouth.FountainOfYouth;
 import com.dsnyder.fountainofyouth.permissions.PermissionManager;
 
-public abstract class FOYCommand {
+public abstract class GenericCommand {
 	
 	private String name;
 	private String description;
 	private String usage;
 	private String permission;
 	
-	public FOYCommand(String name, String description, String usage, String permission) {
+	public GenericCommand(String name, String description, String usage, String permission) {
 		this.name = name;
 		this.description = description;
 		this.usage = usage;

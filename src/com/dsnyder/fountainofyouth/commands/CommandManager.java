@@ -16,7 +16,7 @@ public class CommandManager implements CommandExecutor {
 	public static final String PLUGIN_NAME = "Fountain Of Youth";
 	public static final String PLUGIN_ALIAS = "foyouth";
 
-	private HashMap<String, FOYCommand> commands;
+	private HashMap<String, GenericCommand> commands;
 	private static CommandManager main;
 	
 	public CommandManager() {
@@ -33,11 +33,11 @@ public class CommandManager implements CommandExecutor {
 		return main;
 	}
 	
-	Collection<FOYCommand> getRegisteredCommands() {
+	Collection<GenericCommand> getRegisteredCommands() {
 		return commands.values();
 	}
 	
-	boolean registerCommand(FOYCommand cmd) {
+	boolean registerCommand(GenericCommand cmd) {
 		
 		if (commands.containsKey(cmd.getName())) return false;
 		

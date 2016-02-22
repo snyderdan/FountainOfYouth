@@ -3,7 +3,7 @@ package com.dsnyder.fountainofyouth.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-public class HelpCommand extends FOYCommand {
+public class HelpCommand extends GenericCommand {
 
 	public HelpCommand() {
 		super("help", "Display help page", "help [subcommand]", "foyouth.commands.help");
@@ -12,14 +12,14 @@ public class HelpCommand extends FOYCommand {
 	@Override
 	public boolean _execute(CommandSender sender, String[] args) {
 		if (args.length == 0)
-			for (FOYCommand cmd : CommandManager.getManager().getRegisteredCommands()) 
+			for (GenericCommand cmd : CommandManager.getManager().getRegisteredCommands()) 
 				sender.sendMessage(ChatColor.GOLD + "/" + CommandManager.PLUGIN_ALIAS + " " + cmd.getName() + 
 						": " + ChatColor.WHITE + cmd.getDescription());
 		else {
 			
 			boolean found = false;
 			
-			for (FOYCommand cmd : CommandManager.getManager().getRegisteredCommands()) 
+			for (GenericCommand cmd : CommandManager.getManager().getRegisteredCommands()) 
 				if (cmd.getName().equalsIgnoreCase(args[0])) {
 					sender.sendMessage(ChatColor.GOLD + "/" + CommandManager.PLUGIN_ALIAS + " " + cmd.getName() + 
 							": " + ChatColor.WHITE + cmd.getDescription());

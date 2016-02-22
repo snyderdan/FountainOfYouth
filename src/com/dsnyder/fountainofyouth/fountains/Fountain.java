@@ -3,6 +3,9 @@ package com.dsnyder.fountainofyouth.fountains;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
+
+import com.dsnyder.fountainofyouth.util.WorldEditor;
 
 public class Fountain {
 	
@@ -29,10 +32,23 @@ public class Fountain {
 	
 	public boolean generate() {
 		
+		World w = location.getWorld();
+		
+		int x = location.getBlockX();
+		int y = location.getBlockY();
+		int z = location.getBlockZ();
+		
 		if (isGenerated()) return isGenerated();
 		
 		if (location.getWorld().isChunkLoaded(location.getChunk())) {
-			location.getWorld().getBlockAt(location).setType(Material.QUARTZ_BLOCK);
+			WorldEditor.fill(w, x+4, y, z+4, x-4, y, z-4, Material.QUARTZ_BLOCK);
+			WorldEditor.fill(w, x+3, y+4, z+3, x-3, y-1, z-3, Material.AIR);
+			WorldEditor.fill(w, x+4, y-1, z+4, x-4, y-1, z-4, Material.GRASS);
+			WorldEditor.fill(w, x, y+3, z, x, y-1, z, Material.QUARTZ_BLOCK);
+			WorldEditor.fill(w, x+1, y+2, z+1, x-1, y+2, z-1, Material.QUARTZ_BLOCK);
+			WorldEditor.placeBlock(w, x, y+4, z, Material.WATER);
+			WorldEditor.placeBlock(w, x, y+5, z, Material.DIRT);
+			WorldEditor.placeBlock(w, x, y+5, z, Material.AIR);
 			isGenerated = true;
 		}
 		
