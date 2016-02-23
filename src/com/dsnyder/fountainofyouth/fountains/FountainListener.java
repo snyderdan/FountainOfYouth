@@ -19,7 +19,7 @@ public class FountainListener extends BukkitRunnable {
 		hi = fnt.clone();
 		lo = fnt.clone();
 		lo.setX(lo.getX()-3);
-		lo.setY(lo.getX()-3);
+		lo.setY(lo.getY()-3);
 		hi.setX(hi.getX()+3);
 		hi.setY(hi.getY()+4);
 		hi.setX(hi.getZ()+3);

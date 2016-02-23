@@ -9,7 +9,7 @@ import com.dsnyder.fountainofyouth.permissions.PermissionManager;
 public class FountainOfYouth extends JavaPlugin {
 	
 	public static final String VERSION_KEY		= "FOYVersion";
-	public static final String CURRENT_VERSION	= "1.2.1-ALPHA";
+	public static final String CURRENT_VERSION	= "1.3.0-ALPHA";
 	
 	public static final String YOUTH_LORE = "Youth I";
 	public static final String AGING_LORE = "Aging I";

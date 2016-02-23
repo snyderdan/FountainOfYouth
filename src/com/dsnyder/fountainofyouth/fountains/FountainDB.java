@@ -30,27 +30,7 @@ public class FountainDB {
 			Path path = Paths.get(FountainOfYouth.getPlugin().getDataFolder().getPath(), "fountain_data.db");
 			db = FileChannel.open(path, EnumSet.of(StandardOpenOption.CREATE, StandardOpenOption.READ,
 					StandardOpenOption.WRITE, StandardOpenOption.DSYNC));
-			/*
-			File file = new File(FountainOfYouth.getPlugin().getDataFolder(), "fountain_data.db");
 			
-			
-			if (!file.getParentFile().exists())
-				file.getParentFile().mkdirs();
-			
-			if (!file.exists())
-				file.createNewFile();
-			
-			RandomAccessFile aFile = new RandomAccessFile(file, "rw");
-			db = aFile.getChannel();
-			
-			if (db.size() > 0) {
-				ByteBuffer buf = ByteBuffer.allocate(new Fountain(new Location(null, 0, 0, 0)).stringifyLength());
-				while (db.position() != db.size()-1) {
-					db.read(buf);
-					fountains.add(Fountain.unstringify(new String(buf.array())));
-				}
-			}
-			*/
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

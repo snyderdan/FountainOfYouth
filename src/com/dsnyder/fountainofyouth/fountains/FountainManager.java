@@ -25,16 +25,14 @@ public class FountainManager implements Listener {
 	@EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onLoadChunk(ChunkLoadEvent event) {
 		
-		for (Fountain f : db.getFountainsInChunk(event.getChunk())) {
+		for (Fountain f : db.getFountainsInChunk(event.getChunk()))
 			f.load();
-		}
 	}
 	
 	@EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onUnloadChunk(ChunkUnloadEvent event) {
-		for (Fountain f : db.getFountainsInChunk(event.getChunk())) {
+		for (Fountain f : db.getFountainsInChunk(event.getChunk()))
 			f.unload();
-		}
 	}
 	
 	public void addFountain(CommandSender sender, Location loc) {
