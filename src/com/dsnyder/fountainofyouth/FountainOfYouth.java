@@ -9,7 +9,7 @@ import com.dsnyder.fountainofyouth.permissions.PermissionManager;
 public class FountainOfYouth extends JavaPlugin {
 	
 	public static final String VERSION_KEY		= "FOYVersion";
-	public static final String CURRENT_VERSION	= "1.3.0-ALPHA";
+	public static final String CURRENT_VERSION	= "1.3.2-ALPHA";
 	
 	public static final String YOUTH_LORE = "Youth I";
 	public static final String AGING_LORE = "Aging I";
@@ -20,8 +20,8 @@ public class FountainOfYouth extends JavaPlugin {
 	public void onEnable() {
 		main = this;
 		new PermissionManager();	// simply call constructor to initialize static manager
-		new FountainManager();
 		getServer().getPluginManager().registerEvents(new PotionListener(), this);
+		getServer().getPluginManager().registerEvents(new FountainManager(), this);
 		getCommand("foyouth").setExecutor(new CommandManager());
 	}
 	

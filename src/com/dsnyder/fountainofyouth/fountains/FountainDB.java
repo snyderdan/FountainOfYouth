@@ -56,6 +56,26 @@ public class FountainDB {
 		return fnts;
 	}
 	
+	public void update(Fountain fountain) {
+		
+		int i = 0; 
+		
+		for (Fountain fnt : fountains) {
+			if (fnt.getLocation().equals(fountain.getLocation())) {
+				try {
+					db.position(i * fnt.stringifyLength());
+					db.write(ByteBuffer.wrap(fountain.stringify().getBytes()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				break;
+			}
+			i++;
+		}
+	}
+	
 	public void save(Fountain fountain) {
 		try {
 			db.position(db.size());
