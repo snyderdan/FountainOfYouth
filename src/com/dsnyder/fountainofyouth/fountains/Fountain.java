@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 
+import com.dsnyder.fountainofyouth.FountainOfYouth;
 import com.dsnyder.fountainofyouth.util.WorldEditor;
 
 public class Fountain {
@@ -16,6 +17,7 @@ public class Fountain {
 	
 	private Location location;
 	private boolean isGenerated;
+	private FountainListener listener;
 	
 	public Fountain(Location l) {
 		this.location = l;
@@ -30,15 +32,29 @@ public class Fountain {
 		return isGenerated;
 	}
 	
+	public boolean load() {
+		if (generate()) {
+			listener = new FountainListener(this);
+			listener.runTaskTimer(FountainOfYouth.getPlugin(), 20, 20);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void unload() {
+		listener.cancel();
+		listener = null;
+	}
+	
 	public boolean generate() {
 		
-		World w = location.getWorld();
+		if (isGenerated()) return isGenerated();
 		
+		World w = location.getWorld();
 		int x = location.getBlockX();
 		int y = location.getBlockY();
 		int z = location.getBlockZ();
-		
-		if (isGenerated()) return isGenerated();
 		
 		if (location.getWorld().isChunkLoaded(location.getChunk())) {
 			WorldEditor.fill(w, x+4, y, z+4, x-4, y, z-4, Material.QUARTZ_BLOCK);

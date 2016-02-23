@@ -21,7 +21,7 @@ public class FountainOfYouth extends JavaPlugin {
 		main = this;
 		new PermissionManager();	// simply call constructor to initialize static manager
 		new FountainManager();
-		getServer().getPluginManager().registerEvents(new YouthListener(), this);
+		getServer().getPluginManager().registerEvents(new PotionListener(), this);
 		getCommand("foyouth").setExecutor(new CommandManager());
 	}
 	

@@ -3,23 +3,23 @@ package com.dsnyder.fountainofyouth.fountains;
 import java.util.List;
 
 import org.bukkit.Chunk;
-import org.bukkit.Location;
 
 import com.dsnyder.fountainofyouth.FountainOfYouth;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.EnumSet;
 
 public class FountainDB {
 	
 	private List<Fountain> fountains;
 	private FileChannel db;
 	
-	@SuppressWarnings("resource")
 	public FountainDB() {
 		fountains = new ArrayList<>();
 		
@@ -27,7 +27,12 @@ public class FountainDB {
 			// initialize our file channel in such a way that it will be persistent between memory and disk
 			// and we can seek specific fountains
 			
+			Path path = Paths.get(FountainOfYouth.getPlugin().getDataFolder().getPath(), "fountain_data.db");
+			db = FileChannel.open(path, EnumSet.of(StandardOpenOption.CREATE, StandardOpenOption.READ,
+					StandardOpenOption.WRITE, StandardOpenOption.DSYNC));
+			/*
 			File file = new File(FountainOfYouth.getPlugin().getDataFolder(), "fountain_data.db");
+			
 			
 			if (!file.getParentFile().exists())
 				file.getParentFile().mkdirs();
@@ -45,6 +50,7 @@ public class FountainDB {
 					fountains.add(Fountain.unstringify(new String(buf.array())));
 				}
 			}
+			*/
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
