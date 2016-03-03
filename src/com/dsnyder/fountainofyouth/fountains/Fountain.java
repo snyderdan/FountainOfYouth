@@ -20,7 +20,7 @@ public class Fountain {
 	private FountainListener listener;
 	
 	public Fountain(Location l) {
-		this.location = l;
+		this.location = l.clone();
 		isGenerated = false;
 	}
 	
@@ -33,9 +33,14 @@ public class Fountain {
 	}
 	
 	public boolean load() {
+		
+		Bukkit.broadcastMessage(String.format("Fountain loading@%d %d %d\n",
+				location.getBlockX(), location.getBlockY(), location.getBlockZ()));
+		
 		if (generate()) {
 			listener = new FountainListener(this);
 			listener.runTaskTimer(FountainOfYouth.getPlugin(), 20, 20);
+			Bukkit.broadcastMessage("Fountain loaded");
 			return true;
 		} else {
 			return false;
@@ -43,11 +48,17 @@ public class Fountain {
 	}
 	
 	public void unload() {
+		
+		Bukkit.broadcastMessage(String.format("Fountain unloading@%d %d %d\n",
+				location.getBlockX(), location.getBlockY(), location.getBlockZ()));
+		
+		if (listener == null) return;
 		listener.cancel();
 		listener = null;
+		Bukkit.broadcastMessage("Fountain unloaded");
 	}
 	
-	public boolean generate() {
+	private boolean generate() {
 		
 		if (isGenerated()) return isGenerated();
 		
@@ -57,6 +68,10 @@ public class Fountain {
 		int z = location.getBlockZ();
 		
 		if (location.getWorld().isChunkLoaded(location.getChunk())) {
+			
+			Bukkit.broadcastMessage(String.format("Fountain generating@%d %d %d\n",
+					location.getBlockX(), location.getBlockY(), location.getBlockZ()));
+			
 			WorldEditor.fill(w, x+4, y, z+4, x-4, y, z-4, Material.QUARTZ_BLOCK);
 			WorldEditor.fill(w, x+3, y+4, z+3, x-3, y-1, z-3, Material.AIR);
 			WorldEditor.fill(w, x+4, y-1, z+4, x-4, y-1, z-4, Material.GRASS);
@@ -108,7 +123,7 @@ public class Fountain {
 	
 	public int stringifyLength() {
 		if (len == null) {
-			len = stringify().length();
+			len = new Integer(stringify().length());
 		}
 		
 		return len.intValue();

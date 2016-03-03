@@ -3,6 +3,7 @@ package com.dsnyder.fountainofyouth.fountains;
 import java.util.List;
 
 import org.bukkit.Chunk;
+import org.bukkit.Location;
 
 import com.dsnyder.fountainofyouth.FountainOfYouth;
 
@@ -30,6 +31,14 @@ public class FountainDB {
 			Path path = Paths.get(FountainOfYouth.getPlugin().getDataFolder().getPath(), "fountain_data.db");
 			db = FileChannel.open(path, EnumSet.of(StandardOpenOption.CREATE, StandardOpenOption.READ,
 					StandardOpenOption.WRITE, StandardOpenOption.DSYNC));
+			
+			if (db.size() > 0) {
+				ByteBuffer buf = ByteBuffer.allocate(new Fountain(new Location(null, 0, 0, 0)).stringifyLength());
+				while (db.position() < db.size()-1) {
+					db.read(buf);
+					fountains.add(Fountain.unstringify(new String(buf.array())));
+				}
+			}
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

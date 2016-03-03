@@ -1,7 +1,7 @@
 package com.dsnyder.fountainofyouth.fountains;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -24,8 +24,8 @@ public class FountainManager implements Listener {
 	
 	@EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onLoadChunk(ChunkLoadEvent event) {
-		
 		for (Fountain f : db.getFountainsInChunk(event.getChunk())) {
+			Bukkit.broadcastMessage("load " + event.getChunk().toString());
 			f.load();
 			db.update(f);
 		}
@@ -34,16 +34,16 @@ public class FountainManager implements Listener {
 	@EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onUnloadChunk(ChunkUnloadEvent event) {
 		for (Fountain f : db.getFountainsInChunk(event.getChunk())) {
+			Bukkit.broadcastMessage("unload " + event.getChunk().toString());
 			f.unload();
 			db.update(f);
 		}
 	}
 	
-	public void addFountain(CommandSender sender, Location loc) {
-		
+	public void createFountain(Location loc) {
 		Fountain fountain = new Fountain(loc);
 		if (db == null) db = new FountainDB();
-		fountain.generate();
+		fountain.load();
 		db.save(fountain);
 	}
 	

@@ -39,7 +39,7 @@ public class CreateCommand extends GenericCommand {
 			return false;
 		}
 
-		FountainManager.getManager().addFountain(sender, loc);
+		FountainManager.getManager().createFountain(loc);
 		return true;
 	}
 
